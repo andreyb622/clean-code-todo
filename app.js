@@ -3,37 +3,37 @@ const addButton = document.querySelector('.task-row-wrapper button');
 const todoList = document.getElementById('incompleteTasks');
 const completedList = document.getElementById('completed-tasks');
 
-const createTaskElement = function (taskText) {
-  const listItem = document.createElement('li');
-
-  const checkBox = document.createElement('input');
-  const label = document.createElement('label');
-  const editInput = document.createElement('input');
-  const editButton = document.createElement('button');
-
+const createDeleteButton = function () {
   const deleteButton = document.createElement('button');
-  const deleteButtonImg = document.createElement('img');
+  deleteButton.className = 'delete';
 
-  label.innerText = taskText;
-  label.className = 'task';
+  const deleteIcon = document.createElement('img');
+  deleteIcon.src = './remove.svg';
+  deleteButton.append(deleteIcon);
 
+  return deleteButton;
+};
+
+const createTaskElement = function (taskText) {
+  const checkBox = document.createElement('input');
   checkBox.type = 'checkbox';
-  editInput.type = 'text';
-  editInput.className = 'task';
 
+  const label = document.createElement('label');
+  label.className = 'task';
+  label.innerText = taskText;
+
+  const editInput = document.createElement('input');
+  editInput.className = 'task';
+  editInput.type = 'text';
+
+  const editButton = document.createElement('button');
+  editButton.className = 'edit';
   //innerText encodes special characters, HTML does not.
   editButton.innerText = 'Edit';
-  editButton.className = 'edit';
 
-  deleteButton.className = 'delete';
-  deleteButtonImg.src = './remove.svg';
-  deleteButton.appendChild(deleteButtonImg);
+  const listItem = document.createElement('li');
 
-  listItem.appendChild(checkBox);
-  listItem.appendChild(label);
-  listItem.appendChild(editInput);
-  listItem.appendChild(editButton);
-  listItem.appendChild(deleteButton);
+  listItem.append(checkBox, label, editInput, editButton, createDeleteButton());
   return listItem;
 };
 
